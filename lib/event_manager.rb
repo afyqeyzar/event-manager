@@ -2,6 +2,7 @@ require 'csv'
 require 'google/apis/civicinfo_v2'
 require 'erb'
 require 'time'
+require 'date'
 
 def clean_zipcode(zipcode)
   zipcode.to_s.rjust(5,"0")[0..4]
@@ -46,7 +47,8 @@ end
 
 def get_time(time)
   time = time.split(" ")
-  Time.parse(time[1]).hour
+  #time[0]
+  Date.strptime(time[0], "%m/%d/%Y").wday 
 end  
 
 puts 'EventManager initialized.'
@@ -71,7 +73,8 @@ contents.each do |row|
 
   # save_thank_you_letter(id,form_letter)
   #p clean_numbers(row[5])
-  times << get_time(row[1])
+  puts get_time(row[1])
+  #p row[1]
 end
 
-p times.sort
+#p times.sort

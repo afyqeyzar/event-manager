@@ -33,7 +33,14 @@ end
 
 def clean_numbers(ph_number)
 
-  puts ph_number.delete('().-')
+  ph_number.delete!('().-')
+  if ph_number.length == 10
+    ph_number
+  elsif ph_number.length == 11 and ph_number[0] == "1"
+    ph_number[1,10]
+  else
+    "bad number"
+  end
 end
 
 puts 'EventManager initialized.'
@@ -56,5 +63,6 @@ contents.each do |row|
   # form_letter = erb_template.result(binding)
 
   # save_thank_you_letter(id,form_letter)
-  clean_numbers(row[5])
+  #p clean_numbers(row[5])
+  puts row[1]
 end
